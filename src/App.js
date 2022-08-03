@@ -7,13 +7,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hi");
+    let amount = parseInt(count);
+    if (amount < 0) {
+      amount = 1;
+    }
+    if (amount > 8) {
+      amount = 8;
+    }
+    setText(data.slice(0, amount));
   };
 
   return (
     <section className="section-center">
       <h3>Tired of Lorem Ipsum?</h3>
-      <form onClick={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="amount">Paragraphs: </label>
         <input
           type="number"
@@ -27,16 +34,9 @@ function App() {
         </button>
       </form>
       <article className="lorem-text">
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda
-          nisi dignissimos quaerat distinctio natus aspernatur accusantium
-          consequuntur tenetur dolor sint.
-        </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda
-          nisi dignissimos quaerat distinctio natus aspernatur accusantium
-          consequuntur tenetur dolor sint.
-        </p>
+        {text.map((item, index) => {
+          return <p key={index}>{item}</p>;
+        })}
       </article>
     </section>
   );
